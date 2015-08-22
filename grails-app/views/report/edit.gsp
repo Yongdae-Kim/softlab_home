@@ -1,0 +1,44 @@
+<%@ page import="com.jejuuniv.softlab.home.Subject"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="layout" content="main" />
+
+<title>Register Product to OpenMarket</title>
+
+</head>
+<body onload=''>
+	<section id="intro" class="home-section">
+		<div class="container">
+			<div class="page-header">
+				<h1>
+					${subjectName}
+					레포트 수정하기 <br>
+					<br>
+					<small>After completing the form, Click the 'Register'
+						button</small>
+				</h1>
+			</div>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+					<g:uploadForm action="update" method="POST">
+						<g:hiddenField name="id" value="${reportInstance?.id}" />
+						<g:hiddenField name="version" value="${reportInstance?.version}" />
+
+						<%-- #################### _form 템플릿 #################### --%>
+						<g:render template="/report/form" />
+						<%-- ###################################################### --%>
+
+						<div class="form-group">
+							<g:submitButton name="save"
+								class="btn btn-skin pull-right btn-lg btn-block" value="수 정 하 기" />
+						</div>
+					</g:uploadForm>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
+
