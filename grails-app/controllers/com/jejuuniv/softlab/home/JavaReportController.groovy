@@ -17,12 +17,14 @@ class JavaReportController {
 	final String DELETE_LOG_FILE_NAME = "delete.log"
 
 	final String NO_REGISTED_USER_MSG = "등록된 사용자가 아닙니다."
+	final String REGISTED_REPORT_CONFIRM_MSG = "등록된 레포트를 확인해 주세요."
+	final String PASSWORD_INCORRECT_MSG = "비밀번호가 일치하지 않습니다. 다시 확인해 주세요."
+	
 	final String NO_BOARD_USER_MSG = SUBJECT_NAME + " 게시판 사용자가 아닙니다."
 
-	static allowedMethods = [login:"POST", save: "POST", edit:"POST", update: "POST", delete: "DELETE"]
+	static allowedMethods = [login:"POST", save: "POST", edit:"POST", update: "POST", delete: "POST"]
 
 	RecaptchaService recaptchaService
-
 
 	def uploadFileService
 
@@ -52,7 +54,7 @@ class JavaReportController {
 	}
 
 	def show(JavaReport reportInstance) {
-		return render(view: "/report/show", model:[subjectName : SUBJECT_NAME, reportInstance : reportInstance])
+		return render(view: "/report/show", model:[subjectName : SUBJECT_NAME, reportInstance : reportInstance, msg: REGISTED_REPORT_CONFIRM_MSG])
 	}
 
 	def login(){
@@ -115,11 +117,12 @@ class JavaReportController {
 			viewName = "/report/show"
 		}
 
-		return render(view: viewName, model:[subjectName : SUBJECT_NAME, reportInstance : reportInstance])
+		return render(view: viewName, model:[subjectName : SUBJECT_NAME, reportInstance : reportInstance, msg : PASSWORD_INCORRECT_MSG])
 	}
 
 	@Transactional
 	def update(JavaReport reportInstance) {
+		// ###################### 등록 시 입력한 비밀번호 확인 여부 체크 ######################
 		if(reportInstance.password == params.confirmPw){
 			if (reportInstance) {
 				// ###################### 업로드 파일 존재여부 체크 ######################
@@ -148,21 +151,25 @@ class JavaReportController {
 
 	@Transactional
 	def delete(JavaReport reportInstance) {
+		// ###################### 등록 시 입력한 비밀번호 확인 여부 체크 ######################
+		if(reportInstance.password == params.confirmPw){
+			if (reportInstance) {
+				// ###################### 기존에 저장된 업로드 파일이 있을경우, 파일 삭제 ######################
+				def alreadyExistedUploadFile = reportInstance.uploadFile
+				if(alreadyExistedUploadFile){
+					fileDelete(alreadyExistedUploadFile.id)
+				}
+				reportInstance.delete flush:true
+				// ###################### 삭제된 레포트 로그 남기기 ######################
+				fileInputOutputService.writeMessage(BOARD_NAME, DELETE_LOG_FILE_NAME, reportInstance.toString())
 
-		if (reportInstance) {
-			// ###################### 기존에 저장된 업로드 파일이 있을경우, 파일 삭제 ######################
-			def alreadyExistedUploadFile = reportInstance.uploadFile
-			if(alreadyExistedUploadFile){
-				fileDelete(alreadyExistedUploadFile.id)
+				redirect (action:"index", method:"GET")
+			}else{
+				notFound()
+				return
 			}
-			reportInstance.delete flush:true
-			// ###################### 삭제된 레포트 로그 남기기 ######################
-			fileInputOutputService.writeMessage(BOARD_NAME, DELETE_LOG_FILE_NAME, reportInstance.toString())
-
-			redirect (action:"index", method:"GET")
 		}else{
-			notFound()
-			return
+			return render(view: "/report/show", model:[subjectName : SUBJECT_NAME, reportInstance : reportInstance, msg : PASSWORD_INCORRECT_MSG])
 		}
 	}
 

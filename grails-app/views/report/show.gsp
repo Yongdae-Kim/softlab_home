@@ -15,8 +15,9 @@
 					${subjectName}
 					레포트
 					<g:link class="btn btn-skin btn-lg" action="index">게시판 목록 보기</g:link>
-					<br> <br> <small>After completing the form, Click
-						the 'Register' button</small>
+					<br> <br> <small>
+						${msg}
+					</small>
 				</h1>
 			</div>
 			<div class="row">
@@ -66,7 +67,7 @@
 						<div class="form-group">
 							<label>비 밀 번 호 확 인</label>
 							<div class="input-group">
-								<g:textField name="confirmPw" class="form-control"
+								<g:passwordField name="confirmPw" type="password" class="form-control"
 									placeholder="등록 시 입력하였던 비밀번호를 입력하세요." />
 								<span class="input-group-addon"></span>
 							</div>
