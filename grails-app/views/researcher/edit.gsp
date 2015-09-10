@@ -1,41 +1,61 @@
-<%@ page import="com.jejuuniv.softlab.home.Researcher" %>
+
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'researcher.label', default: 'Researcher')}" />
-		<title><g:message code="default.edit.label" args="[entityName]" /></title>
-	</head>
-	<body>
-		<a href="#edit-researcher" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+<head>
+<meta name="layout" content="main" />
+
+<title>Register Product to OpenMarket</title>
+
+<script type="text/javascript">
+	j$(document).ready(function() {
+		var opt = {
+			img : j$('#img_preview'),
+			w : 420,
+			h : 460
+		};
+		j$('#input_file').setPreview(opt);
+	});
+</script>
+</head>
+<body onload=''>
+	<section id="intro" class="home-section">
+		<div class="container">
+			<div class="page-header">
+				<h1>연구원 수정하기</h1>
+			</div>
+			<div class="row">
+				<div class="col-md-10 col-md-offset-1">
+
+					<div class="col-md-6">
+						<img id="img_preview" style="display: none;" class="img-thumbnail"
+							alt="Cinque Terre">
+					</div>
+					<div class="col-md-6">
+						<g:uploadForm action="update" method="POST">
+							<fieldset class="form">
+								<g:hiddenField name="id" value="${researcherInstance?.id}" />
+								<g:hiddenField name="version"
+									value="${researcherInstance?.version}" />
+								<div class="well well-sm">
+									<strong><span class="glyphicon glyphicon-asterisk"></span>
+										필 수 입 력</strong>
+								</div>
+								<%-- #################### _form 템플릿 #################### --%>
+								<g:render template="/researcher/form" />
+								<%-- ###################################################### --%>
+							</fieldset>
+							<fieldset class="buttons">
+								<div class="form-group">
+									<g:submitButton name="update"
+										class="btn btn-skin btn-two btn-lg btn-block" value="수 정 하 기" />
+								</div>
+							</fieldset>
+						</g:uploadForm>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div id="edit-researcher" class="content scaffold-edit" role="main">
-			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<g:hasErrors bean="${researcherInstance}">
-			<ul class="errors" role="alert">
-				<g:eachError bean="${researcherInstance}" var="error">
-				<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
-				</g:eachError>
-			</ul>
-			</g:hasErrors>
-			<g:form url="[resource:researcherInstance, action:'update']" method="PUT" >
-				<g:hiddenField name="version" value="${researcherInstance?.version}" />
-				<fieldset class="form">
-					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-				</fieldset>
-			</g:form>
-		</div>
-	</body>
+	</section>
+</body>
 </html>
+

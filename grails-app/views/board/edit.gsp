@@ -22,6 +22,10 @@
 					<g:uploadForm action="update" method="POST">
 						<g:hiddenField name="id" value="${boardInstance?.id}" />
 						<g:hiddenField name="version" value="${boardInstance?.version}" />
+						<div class="well well-sm">
+							<strong><span class="glyphicon glyphicon-asterisk"></span>
+								필 수 입 력</strong>
+						</div>
 						<fieldset class="form">
 							<%-- #################### _form 템플릿 #################### --%>
 							<g:render template="/board/form" />
@@ -29,8 +33,9 @@
 						</fieldset>
 						<fieldset class="buttons">
 							<div class="form-group">
-								<g:submitButton name="save"
-									class="btn btn-skin pull-right btn-lg btn-block" value="수 정 하 기" />
+								<g:submitButton name="update"
+									class="btn btn-skin pull-right btn-lg btn-block"
+									value="수 정 하 기" />
 							</div>
 						</fieldset>
 					</g:uploadForm>

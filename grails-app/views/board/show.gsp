@@ -11,8 +11,14 @@
 		<div class="container">
 			<div class="page-header">
 				<h1>
-					게시글 <br> <small>After completing the form, Click the
-						'Register' button</small>
+					게시글
+					<g:link class="btn btn-skin btn-lg" action="index">목록 보기</g:link>
+					<g:if test="${msg}">
+						<br>
+						<br>
+						<small> ${msg}
+						</small>
+					</g:if>
 				</h1>
 			</div>
 			<div class="row">
@@ -46,19 +52,29 @@
 						</g:if>
 					</ul>
 
-					<g:form url="[resource:boardInstance, action:'delete']"
-						method="DELETE">
-						<g:actionSubmit class="btn btn-skin pull-right btn-lg"
-							action="delete" value="삭 제 하 기"
-							onclick="return confirm('Are you sure?');" />
+					<g:form method="POST" resource="${boardInstance}">
+						<div class="form-group">
+							<label>비 밀 번 호 확 인</label>
+							<div class="input-group">
+								<g:passwordField name="confirmPw" type="password"
+									class="form-control" placeholder="등록 시 입력하였던 비밀번호를 입력하세요." />
+								<span class="input-group-addon"></span>
+							</div>
+						</div>
+						<br>
+						<div class="col-md-6">
+							<div class="form-group">
+								<g:actionSubmit class="btn btn-skin btn-lg btn-block"
+									action="edit" value="수 정 하 기" />
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<g:actionSubmit class="btn btn-skin btn-lg btn-block"
+									action="delete" value="삭 제 하 기" />
+							</div>
+						</div>
 					</g:form>
-
-					<g:form url="[resource:boardInstance, action:'edit']"
-						method="POST">
-						<g:actionSubmit class="btn btn-skin pull-right btn-lg"
-							action="edit" value="수 정 하 기"></g:actionSubmit>
-					</g:form>
-
 				</div>
 			</div>
 		</div>

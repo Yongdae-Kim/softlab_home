@@ -14,10 +14,8 @@
 			<div class="page-header">
 				<h1>
 					${subjectName}
-					레포트 수정하기 <br>
-					<br>
-					<small>After completing the form, Click the 'Register'
-						button</small>
+					레포트 수정하기 <br> <br> <small>After completing the
+						form, Click the 'Register' button</small>
 				</h1>
 			</div>
 			<div class="row">
@@ -25,13 +23,16 @@
 					<g:uploadForm action="update" method="POST">
 						<g:hiddenField name="id" value="${reportInstance?.id}" />
 						<g:hiddenField name="version" value="${reportInstance?.version}" />
-
+						<div class="well well-sm">
+							<strong><span class="glyphicon glyphicon-asterisk"></span>
+								필 수 입 력</strong>
+						</div>
 						<%-- #################### _form 템플릿 #################### --%>
 						<g:render template="/report/form" />
 						<%-- ###################################################### --%>
 
 						<div class="form-group">
-							<g:submitButton name="save"
+							<g:submitButton name="update"
 								class="btn btn-skin pull-right btn-lg btn-block" value="수 정 하 기" />
 						</div>
 					</g:uploadForm>

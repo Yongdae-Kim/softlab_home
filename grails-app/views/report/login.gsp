@@ -10,8 +10,13 @@
 		<div class="container">
 			<div class="page-header">
 				<h1>
-					${subjectName}
-					게시판 로그인 하기<br> <br> <small> ${msg}</small>
+					${subjectName} 게시판 로그인 하기
+					<g:if test="${msg}">
+						<br>
+						<br>
+						<small> ${msg}
+						</small>
+					</g:if>
 				</h1>
 			</div>
 			<div class="row">

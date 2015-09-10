@@ -1,59 +1,47 @@
-<%@ page import="com.jejuuniv.softlab.home.Researcher"%>
-
-
-
-<div
-	class="fieldcontain ${hasErrors(bean: researcherInstance, field: 'admissionDate', 'error')} ">
-	<label for="admissionDate"> <g:message
-			code="researcher.admissionDate.label" default="Admission Date" />
-
-	</label>
-	<g:datePicker name="admissionDate" precision="day"
-		value="${researcherInstance?.admissionDate}" default="none"
-		noSelection="['': '']" />
-
+<div class="form-group">
+	<label>이 름</label>
+	<div class="input-group">
+		<g:textField name="name" class="form-control"
+			value="${fieldValue(bean: researcherInstance, field: 'name')}"
+			required="required" placeholder="이름을 입력하세요." />
+		<span class="input-group-addon"><span
+			class="glyphicon glyphicon-asterisk"></span></span>
+	</div>
 </div>
-
-<div
-	class="fieldcontain ${hasErrors(bean: researcherInstance, field: 'name', 'error')} required">
-	<label for="name"> <g:message code="researcher.name.label"
-			default="Name" /> <span class="required-indicator">*</span>
-	</label>
-	<g:textField name="name" required=""
-		value="${researcherInstance?.name}" />
-
+<div class="form-group">
+	<label>입학년도</label>
+	<div class="input-group">
+		<g:field type="number" name="admissionNum" class="form-control"
+			value="${fieldValue(bean: researcherInstance, field: 'admissionNum')}"
+			placeholder="입학년도를 입력하세요." />
+		<span class="input-group-addon"></span>
+	</div>
 </div>
-
-<div
-	class="fieldcontain ${hasErrors(bean: researcherInstance, field: 'email', 'error')} ">
-	<label for="email"> <g:message code="researcher.email.label"
-			default="Email" />
-
-	</label>
-	<g:textField name="email" value="${researcherInstance?.email}" />
-
+<div class="form-group">
+	<label>연 락 처</label>
+	<div class="input-group">
+		<g:field type="tel" name="phoneNum" class="form-control"
+			value="${fieldValue(bean: researcherInstance, field: 'phoneNum')}"
+			placeholder="연락처를 입력하세요." />
+		<span class="input-group-addon"><span
+			class="glyphicon glyphicon-asterisk"></span></span>
+	</div>
 </div>
-
-<div
-	class="fieldcontain ${hasErrors(bean: researcherInstance, field: 'phoneNum', 'error')} ">
-	<label for="phoneNum"> <g:message
-			code="researcher.phoneNum.label" default="Phone Num" />
-
-	</label>
-	<g:textField name="phoneNum" value="${researcherInstance?.phoneNum}" />
-
+<div class="form-group">
+	<label>이 메 일</label>
+	<div class="input-group">
+		<g:field type="email" name="email" class="form-control"
+			value="${fieldValue(bean: researcherInstance, field: 'email')}"
+			placeholder="이메일을 입력하세요." />
+		<span class="input-group-addon"><span
+			class="glyphicon glyphicon-asterisk"></span></span>
+	</div>
 </div>
-
-<div
-	class="fieldcontain ${hasErrors(bean: researcherInstance, field: 'uploadFile', 'error')} ">
-	<label for="uploadFile"> <g:message
-			code="researcher.uploadFile.label" default="Upload File" />
-
-	</label>
-	<g:select id="uploadFile" name="uploadFile.id"
-		from="${com.jejuuniv.softlab.home.UploadFile.list()}" optionKey="id"
-		value="${researcherInstance?.uploadFile?.id}" class="many-to-one"
-		noSelection="['null': '']" />
-
+<div class="form-group">
+	<label>사진 등록</label>
+	<div class="input-group">
+		<input type="file" id="input_file" multiple accept='image/*'
+			name="upload_file" class="form-control" /> <span
+			class="input-group-addon"></span>
+	</div>
 </div>
-

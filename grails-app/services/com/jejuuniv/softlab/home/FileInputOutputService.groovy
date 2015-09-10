@@ -11,7 +11,6 @@ class FileInputOutputService {
 		textFile = new File(dir, fileName);
 		FileWriter writer = new FileWriter(textFile, true);
 		
-		writer << System.getProperty('line.separator')
 		writer << message
 		writer << System.getProperty('line.separator')
 		writer.close();

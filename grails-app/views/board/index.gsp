@@ -13,9 +13,7 @@
 		<div class="container">
 			<div class="page-header">
 				<h1>
-					자유 게시판 <br>
-					<br>
-					<small>비방 및 광고성은 글은 경고없이 삭제됩니다.</small>
+					자유 게시판 <br> <br> <small>비방 및 광고성은 글은 경고없이 삭제됩니다.</small>
 				</h1>
 			</div>
 			<div class="row">
@@ -38,6 +36,7 @@
 							<tr>
 								<g:sortableColumn property="id" title="번 호" />
 								<td>제 목</td>
+								<td>업로드 파일</td>
 								<td>작 성 자</td>
 								<g:sortableColumn property="dateCreated" title="작 성 일" />
 							</tr>
@@ -54,7 +53,12 @@
 									<td>
 										${fieldValue(bean: boardInstance, field: "writer")}
 									</td>
-
+									<td><g:if test="${boardInstance?.uploadFile?.path}">
+											<g:link action="fileDownload"
+												id="${boardInstance.uploadFile.id}">
+												${fieldValue(bean: boardInstance, field: "uploadFile.name")}
+											</g:link>
+										</g:if> <g:else>업로드 파일 없음</g:else></td>
 									<td><g:formatDate type="datetime" style="MEDIUM"
 											date="${boardInstance.lastUpdated}" /></td>
 								</tr>

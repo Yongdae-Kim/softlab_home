@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView
 @Transactional(readOnly = true)
 class ReportController {
 
+	final String NO_REGISTED_USER_MSG = "등록된 사용자가 아닙니다."
+	
 	static allowedMethods = [login:"POST"]
 
 	def uploadFileService
@@ -24,6 +26,7 @@ class ReportController {
 	}
 
 	def login(){
+		
 		// ###################### 유저확인 체크 ######################
 		def confirmUser = User.findByUserIdAndUserPw(params.userId, params.userPw)
 		if(confirmUser){
@@ -32,10 +35,10 @@ class ReportController {
 				session.user = "admin"
 				redirect (action: "list")
 			}else{
-				return render(view: "/report/login")
+				return render(view: "/report/login", model:[msg : NO_REGISTED_USER_MSG])
 			}
 		}else{
-			return render(view: "/report/login")
+			return render(view: "/report/login", model:[msg : NO_REGISTED_USER_MSG])
 		}
 	}
 

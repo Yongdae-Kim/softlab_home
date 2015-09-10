@@ -15,7 +15,10 @@ class BoardController {
 
 	final String BOARD_NAME = "free_board"
 
-	static allowedMethods = [save: "POST", edit:"POST", update: "POST", delete: "DELETE"]
+	final String NO_REGISTED_USER_MSG = "등록된 사용자가 아닙니다."
+	final String PASSWORD_INCORRECT_MSG = "비밀번호가 일치하지 않습니다. 다시 확인해 주세요."
+	
+	static allowedMethods = [save: "POST", edit:"POST", update: "POST", delete: "POST"]
 
 	RecaptchaService recaptchaService
 
@@ -85,7 +88,12 @@ class BoardController {
 	}
 
 	def edit(Board boardInstance) {
-		return render(view: "edit", model:[boardInstance : boardInstance])
+		def viewName = "/board/edit"
+		// ###################### 등록 시 입력한 비밀번호 확인 여부 체크 ######################
+		if(boardInstance.password != params.confirmPw){
+			viewName = "/board/show"
+		}
+		return render(view: viewName, model:[boardInstance : boardInstance, msg : PASSWORD_INCORRECT_MSG])
 	}
 
 	@Transactional
@@ -118,19 +126,23 @@ class BoardController {
 
 	@Transactional
 	def delete(Board boardInstance) {
+		// ###################### 등록 시 입력한 비밀번호 확인 여부 체크 ######################
+		if(boardInstance.password == params.confirmPw){
+			if (boardInstance) {
+				// ###################### 기존에 저장된 업로드 파일이 있을경우, 파일 삭제 ######################
+				def alreadyExistedUploadFile = boardInstance.uploadFile
+				if(alreadyExistedUploadFile){
+					fileDelete(alreadyExistedUploadFile.id)
+				}
+				boardInstance.delete flush:true
 
-		if (boardInstance) {
-			// ###################### 기존에 저장된 업로드 파일이 있을경우, 파일 삭제 ######################
-			def alreadyExistedUploadFile = boardInstance.uploadFile
-			if(alreadyExistedUploadFile){
-				fileDelete(alreadyExistedUploadFile.id)
+				redirect (action:"index", method:"GET")
+			}else{
+				notFound()
+				return
 			}
-			boardInstance.delete flush:true
-
-			redirect (action:"index", method:"GET")
 		}else{
-			notFound()
-			return
+			return render(view: "/board/show", model:[boardInstance : boardInstance, msg : PASSWORD_INCORRECT_MSG])
 		}
 	}
 

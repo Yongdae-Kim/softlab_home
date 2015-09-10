@@ -18,7 +18,6 @@ class DataStrReportController {
 	final String DELETE_LOG_FILE_NAME = "delete.log"
 
 	final String NO_REGISTED_USER_MSG = "등록된 사용자가 아닙니다."
-	final String REGISTED_REPORT_CONFIRM_MSG = "등록된 레포트를 확인해 주세요."
 	final String PASSWORD_INCORRECT_MSG = "비밀번호가 일치하지 않습니다. 다시 확인해 주세요."
 	
 	final String NO_BOARD_USER_MSG = SUBJECT_NAME + " 게시판 사용자가 아닙니다."
@@ -55,7 +54,7 @@ class DataStrReportController {
 	}
 
 	def show(DataStrReport reportInstance) {
-			return render(view: "/report/show", model:[subjectName : SUBJECT_NAME, reportInstance : reportInstance, msg: REGISTED_REPORT_CONFIRM_MSG])
+			return render(view: "/report/show", model:[subjectName : SUBJECT_NAME, reportInstance : reportInstance])
 	}
 
 	def login(){
