@@ -2,9 +2,6 @@
 <html>
 <head>
 <meta name="layout" content="main" />
-
-<title>Register Product to OpenMarket</title>
-
 </head>
 <body onload=''>
 	<section id="intro" class="home-section">

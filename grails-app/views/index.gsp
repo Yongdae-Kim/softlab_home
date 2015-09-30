@@ -3,8 +3,6 @@
 <html>
 <head>
 
-<title>Squadfree - Free bootstrap 3 one page template</title>
-
 <meta name="layout" content="main" />
 
 </head>

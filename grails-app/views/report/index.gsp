@@ -5,8 +5,6 @@
 <head>
 <meta name="layout" content="main" />
 
-<title>Register Product to OpenMarket</title>
-
 </head>
 
 <body onload=''>

@@ -4,8 +4,6 @@
 <head>
 <meta name="layout" content="main" />
 
-<title>Register Product to OpenMarket</title>
-
 <script type="text/javascript">
 	j$(document).ready(function() {
 		var opt = {

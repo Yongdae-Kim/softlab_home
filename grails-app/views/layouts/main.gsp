@@ -17,7 +17,7 @@
 <meta name="description" content="softlab homepage project" />
 <meta name="author" content="teach.d" />
 
-<title><g:layoutTitle default="Grails" /></title>
+<title>소프트웨어 개발 연구실(SoftLab)</title>
 
 <link rel="stylesheet"
 	href="${resource(dir: 'css', file: 'bootstrap.min.css')}"
@@ -42,6 +42,7 @@
 <g:javascript library='wow.min' />
 <g:javascript library='custom' />
 <g:javascript library='img_preview' />
+
 
 <g:layoutHead />
 

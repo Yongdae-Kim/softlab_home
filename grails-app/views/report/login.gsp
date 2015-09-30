@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta name="layout" content="main" />
-<title>Log in to OpenMarket</title>
 
 </head>
 <body onload=''>
