@@ -5,11 +5,11 @@ class BootStrap {
 
 	def init = { servletContext ->
 
-		//		new User(userId : 'admin@softlab.ac.kr', userPw : "123", userRole : UserRole.admin).save()
-		//		new User(userId : 'java@softlab.ac.kr', userPw : "123", userRole : UserRole.java).save()
-		//		new User(userId : 'cs@softlab.ac.kr', userPw : "123", userRole : UserRole.csharp).save()
-		//		new User(userId : 'and@softlab.ac.kr', userPw : "123", userRole : UserRole.android).save()
-		//		new User(userId : 'data@softlab.ac.kr', userPw : "123", userRole : UserRole.dataStr).save()
+//				new User(userId : 'admin@softlab.ac.kr', userPw : "123", userRole : UserRole.admin).save()
+//				new User(userId : 'java@softlab.ac.kr', userPw : "123", userRole : UserRole.java).save()
+//				new User(userId : 'cs@softlab.ac.kr', userPw : "123", userRole : UserRole.csharp).save()
+//				new User(userId : 'and@softlab.ac.kr', userPw : "123", userRole : UserRole.android).save()
+//				new User(userId : 'data@softlab.ac.kr', userPw : "123", userRole : UserRole.dataStr).save()
 
 		//		new Researcher(admissionNum : '1900', name : "강경옥", phoneNum : "01030805770").save()
 		//		new Researcher(admissionNum : '1900', name : "고승용", phoneNum : "01076398051").save()
